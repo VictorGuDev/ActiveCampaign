@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/viewList/{any}', 'ActiveCampaignController@viewList');
+Route::get('/viewContact/{any}', 'ActiveCampaignController@viewContact');
+Route::get('/addContact', 'ActiveCampaignController@addContact');
+Route::get('/updateContact', 'ActiveCampaignController@updateContact');
