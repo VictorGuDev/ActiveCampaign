@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ActiveCampaignServiceProvider::class,
+        App\Providers\AcWebhookServiceProvider::class,
 
     ],
 
