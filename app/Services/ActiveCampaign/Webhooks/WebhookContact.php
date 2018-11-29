@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\ActiveCampaign\Webhooks;
+use App\Model\ActiveCampaign\Contact;
 
 class WebhookContact {
     
@@ -14,9 +15,9 @@ class WebhookContact {
         $ip = $contact['ip'];
         $tags = $contact['tags'];
         
-        $existingContact = \App\Model\ActiveCampaign\Contact::where('email',$email)->first();
+        $existingContact = Contact::find($email);
         if(!$existingContact){
-            $contact = new \App\Model\ActiveCampaign\Contact;
+            $contact = new Contact;
             $contact->ac_id = $ac_id;
             $contact->email = $email;
             $contact->first_name = $first_name;
@@ -27,7 +28,8 @@ class WebhookContact {
             $contact->save();
             return 'create new contact';
         }else{
-            $contact = \App\Model\ActiveCampaign\Contact::where('ac_id',$ac_id)->first();
+            $contact = Contact::find($email);
+            $contact->ac_id = $ac_id;
             $contact->first_name = $first_name;
             $contact->last_name = $last_name;
             $contact->phone = $phone;
