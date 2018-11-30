@@ -15,29 +15,25 @@ class WebhookContact {
         $ip = $contact['ip'];
         $tags = $contact['tags'];
         
-        $existingContact = Contact::find($email);
-        if(!$existingContact){
-            $contact = new Contact;
-            $contact->ac_id = $ac_id;
-            $contact->email = $email;
-            $contact->first_name = $first_name;
-            $contact->last_name = $last_name;
-            $contact->phone = $phone;
-            $contact->ip = $ip;
-            $contact->tags = $tags;
-            $contact->save();
-            return 'create new contact';
-        }else{
-            $contact = Contact::find($email);
-            $contact->ac_id = $ac_id;
-            $contact->first_name = $first_name;
-            $contact->last_name = $last_name;
-            $contact->phone = $phone;
-            $contact->ip = $ip;
-            $contact->tags = $tags;
-            $contact->save();
-            return 'update existing contact';
+        $contact = Contact::find($email);
+        if(!$contact){
+            //when email address updated in active campaign
+            $contact = Contact::where('ac_id',$ac_id)->first();
         }
+        if(!$contact){
+            $contact = new Contact;
+        }
+
+        $contact = new Contact;
+        $contact->ac_id = $ac_id;
+        $contact->email = $email;
+        $contact->first_name = $first_name;
+        $contact->last_name = $last_name;
+        $contact->phone = $phone;
+        $contact->ip = $ip;
+        $contact->tags = $tags;
+        $contact->save();
+        
     }
 
 }

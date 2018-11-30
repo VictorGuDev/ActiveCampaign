@@ -18,7 +18,7 @@ if (!$done && isset($route[0]) && $route[0] == 'ac'){
         Route::get('/viewList/{any}', 'ActiveCampaignController@viewList');
         Route::get('/viewContact/{any}', 'ActiveCampaignController@viewContact');
         Route::get('/addContact', 'ActiveCampaignController@addContact');
-        Route::get('/updateContact', 'ActiveCampaignController@updateContact');
+        Route::get('/updateContact/{any}', 'ActiveCampaignController@updateContact');
         Route::any('/webhook/contactUpdate', "AcWebhookController@contactUpdate");
     });
 }

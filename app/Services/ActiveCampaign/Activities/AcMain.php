@@ -24,7 +24,7 @@ class AcMain{
 	}else{
             \Log::warning("Call active campaign service: ".$service." failed. Error returned: ".$contact->error);
             $this->result['success'] = false;
-            $this->result['returnValue'] = null;
+            $this->result['returnValue'] = $contact->error;
         }
         return $this->result;
     }

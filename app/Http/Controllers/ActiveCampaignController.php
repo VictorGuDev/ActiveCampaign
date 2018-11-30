@@ -21,16 +21,13 @@ class ActiveCampaignController extends Controller
     public function addContact(Request $request){
         $service = "contact/sync";
         $data = $request->input();
-        $params = app()->make('AcContact')->newContact($data);
-        $result = app()->make('AcContact')->callActiveCampaign($service,$params);
+        $result = app()->make('AcContact')->newContact($service, $data);
         return response($result)->header('Content-Type', 'application/json');
     }
     
-    public function updateContact(Request $request){
+    public function updateContact($email){
         $service = "contact/edit";
-        $data = $request->input();
-        $params = app()->make('AcContact')->updateContact($data);
-        $result = app()->make('AcContact')->callActiveCampaign($service,$params);
+        $result = app()->make('AcContact')->updateContact($service, $email);
         return response($result)->header('Content-Type', 'application/json');
     }
 }
